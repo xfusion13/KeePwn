@@ -77,14 +77,18 @@ def parse_dump(options):
 
     print_info('Found {} candidates:'.format(len(candidates)))
 
-    for candidate in candidates:
-        print('     ', end='')
-        print(colored('＿', 'red', attrs=['bold']) + candidate)
+    candidate_file = "candidates.txt"
+    with open(candidate_file, 'w') as c_file:
+        for candidate in candidates:
+            print('     ', end='')
+            print(colored('＿', 'red', attrs=['bold']) + candidate)
+            c_file.write(candidate + '\n')
 
     print()
+    print_info('Candidates file save to: {}.'.format(candidate_file))
 
     if not options.bruteforce:
-        print_warning('Note: the two first characters still need to be determined, you can use --bruteforce to test them against an specific KDBX file.')
+        # print_warning('Note: the two first characters still need to be determined, you can use --bruteforce to test them against an specific KDBX file.')
         exit()
 
     if exists(options.bruteforce):
